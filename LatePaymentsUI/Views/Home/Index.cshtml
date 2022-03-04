@@ -1,0 +1,66 @@
+﻿@model InterestModel
+@{
+    ViewData["Title"] = "Interest calculator";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Interest calculator</h1>
+    @using (Html.BeginForm("Calculate", "Home"))
+    {
+        @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.From)
+            </td>
+            <td>
+                <input type="date" name="From" id="From" data-val="true" data-val-required="From date is required." value="@Model.From.ToString("yyyy-MM-dd")" />                
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.From)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.To)
+            </td>
+            <td>
+                <input type="date" name="To" id="To" data-val="true" data-val-required="To date is required." value="@Model.To.ToString("yyyy-MM-dd")" />
+            </td>
+            <td>
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(m => m.To)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Amount)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Amount)
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.Amount)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Country
+            </td>
+            <td>
+                <select name="Country" id="Country">
+                    <option value="si">Slovenia</option>
+                    <option value="cy">Cyprus</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-right">
+                <input type="submit" value="Calculate" />
+            </td>
+        </tr>
+    </table>
+    }
+</div>

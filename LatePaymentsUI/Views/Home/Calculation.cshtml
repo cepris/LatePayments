@@ -1,0 +1,51 @@
+﻿@model LatePaymentsEu.InterestReport
+@{
+    ViewData["Title"] = "Calculation";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table style="width: 100%">
+    <tr>
+        <td>From date</td>
+        <td>To date</td>
+        <td>Days</td>
+        <td>Interest rate (%)</td>
+        <td>Interest (@Model.Currency)</td>
+        <td>Legal basis</td>
+    </tr>
+
+    @foreach (LatePaymentsEu.InterestReportItem r in Model.ReportItems)
+    {
+        @if (r.Type == LatePaymentsEu.TransactionType.Interest)
+        {
+<tr>
+    <td class="text-right" style="border-right: 1px solid gray; padding-right: 10px">@r.From.ToShortDateString()</td>
+    <td class="text-right" style="border-right: 1px solid gray; padding-right: 10px">@r.To.ToShortDateString()</td>
+    <td class="text-right" style="border-right: 1px solid gray; padding-right: 10px">@r.NumberOfDays</td>
+    <td class="text-right" style="border-right: 1px solid gray; padding-right: 10px">@r.InterestRate.ToString("N2")</td>
+    <td class="text-right" style="border-right: 1px solid gray; padding-right: 10px">@r.Amount.ToString("N2")</td>
+    <td>
+        <a href="@r.InterestLegalGround.Url">@r.InterestLegalGround.Title, @r.InterestLegalGround.Reference</a>
+    </td>
+</tr>
+            }
+        }
+
+</table>
+
+<p>&nbsp;</p>
+
+<table style="background-color: lightgray">
+    <tr>
+        <td style="padding-right: 20px; padding-left: 20px">Total interest:</td>
+        <td class="text-right" style="padding-right: 20px">@Model.Interest.ToString("N2") @Model.Currency</td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px; padding-left: 20px">Total debt: </td>
+        <td class="text-right" style="padding-right: 20px">@Model.Debt.ToString("N2") @Model.Currency</td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px; padding-left: 20px">Debt with interest:</td>
+        <td class="text-right" style="padding-right: 20px">@Model.FullDebt.ToString("N2") @Model.Currency</td>
+    </tr>
+</table>

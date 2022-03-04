@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    </PropertyGroup>  
+
+  <ItemGroup>
+    <None Remove="InterestData\CyInterestRates.json" />
+    <None Remove="InterestData\CyLegalGrounds.json" />
+    <None Remove="InterestData\SiInterestRates.json" />
+    <None Remove="InterestData\SiLegalGrounds.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="InterestData\CyInterestRates.json" />
+    <EmbeddedResource Include="InterestData\CyLegalGrounds.json" />
+    <EmbeddedResource Include="InterestData\SiLegalGrounds.json" />
+    <EmbeddedResource Include="InterestData\SiInterestRates.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.3" />
+  </ItemGroup>
+
+</Project>
